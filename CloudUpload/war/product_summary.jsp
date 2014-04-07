@@ -1,14 +1,3 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ page import="java.util.List"%>
-<%@ page import="com.google.appengine.api.blobstore.*"%>
-<%@ page import="cloudupload.Upload"%>
-<!--gmail -->
-<%@ page import="com.google.appengine.api.users.*" %>
-<% UserService userService = UserServiceFactory.getUserService(); %>
-<%
-    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-%>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,14 +32,10 @@
 	<style type="text/css" id="enject"></style>
   </head>
 <body>
-
 <div id="header">
 <div class="container">
 <div id="welcomeLine" class="row">
-	<div class="span6">Welcome!<strong> <% if (userService.getCurrentUser() == null) { }
-else { %>
-<%= userService.getCurrentUser().getNickname() %>
-<% } %> </strong></div>
+	<div class="span6">Welcome!<strong> User</strong></div>
 	<div class="span6">
 	<div class="pull-right">
 		<a href="product_summary.jsp"><span class="">Fr</span></a>
@@ -86,86 +71,40 @@ else { %>
     </form>
     <ul id="topMenu" class="nav pull-right">
 	 <li class=""><a href="special_offer.jsp">Specials Offer</a></li>
-	 <li class=""><a href="admin.jsp">Admin</a></li>
+	 <li class=""><a href="normal.jsp">Delivery</a></li>
 	 <li class=""><a href="contact.jsp">Contact</a></li>
 	 <li class="">
-	 <% if (userService.getCurrentUser() == null) { %>
-<p><a href="<%= userService.createLoginURL("/admin.jsp") %> " ><span class="btn btn-large btn-success">Login</span></a></p>
-<% }
-else { %>
-<p><a href="<%= userService.createLogoutURL("/") %> " ><span class="btn btn-large btn-success">Logout</span></a></p>
-<% } %>
-	 	 </li>
+	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+			<h3>Login Block</h3>
+		  </div>
+		  <div class="modal-body">
+			<form class="form-horizontal loginFrm">
+			  <div class="control-group">								
+				<input type="text" id="inputEmail" placeholder="Email">
+			  </div>
+			  <div class="control-group">
+				<input type="password" id="inputPassword" placeholder="Password">
+			  </div>
+			  <div class="control-group">
+				<label class="checkbox">
+				<input type="checkbox"> Remember me
+				</label>
+			  </div>
+			</form>		
+			<button type="submit" class="btn btn-success">Sign in</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		  </div>
+	</div>
+	</li>
     </ul>
   </div>
 </div>
 </div>
 </div>
 <!-- Header End====================================================================== -->
-<div id="carouselBlk">
-	<div id="myCarousel" class="carousel slide">
-		<div class="carousel-inner">
-		  <div class="item active">
-		  <div class="container">
-			<a href="register.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="special offers"/></a>
-			<div class="carousel-caption">
-				  <h4>Second Thumbnail label</h4>
-				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-				</div>
-		  </div>
-		  </div>
-		  <div class="item">
-		  <div class="container">
-			<a href="register.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt=""/></a>
-				<div class="carousel-caption">
-				  <h4>Second Thumbnail label</h4>
-				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-				</div>
-		  </div>
-		  </div>
-		  <div class="item">
-		  <div class="container">
-			<a href="register.jsp"><img src="themes/images/carousel/3.png" alt=""/></a>
-			<div class="carousel-caption">
-				  <h4>Second Thumbnail label</h4>
-				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-				</div>
-			
-		  </div>
-		  </div>
-		   <div class="item">
-		   <div class="container">
-			<a href="register.jsp"><img src="themes/images/carousel/4.png" alt=""/></a>
-			<div class="carousel-caption">
-				  <h4>Second Thumbnail label</h4>
-				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-				</div>
-		   
-		  </div>
-		  </div>
-		   <div class="item">
-		   <div class="container">
-			<a href="register.jsp"><img src="themes/images/carousel/5.png" alt=""/></a>
-			<div class="carousel-caption">
-				  <h4>Second Thumbnail label</h4>
-				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-			</div>
-		  </div>
-		  </div>
-		   <div class="item">
-		   <div class="container">
-			<a href="register.jsp"><img src="themes/images/carousel/6.png" alt=""/></a>
-			<div class="carousel-caption">
-				  <h4>Second Thumbnail label</h4>
-				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-				</div>
-		  </div>
-		  </div>
-		</div>
-		<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-		<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-	  </div> 
-</div>
 <div id="mainBody">
 	<div class="container">
 	<div class="row">
@@ -173,15 +112,12 @@ else { %>
 	<div id="sidebar" class="span3">
 		<div class="well well-small"><a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>
 		<ul id="sideManu" class="nav nav-tabs nav-stacked">
-			<li class="subMenu open"><a> Electro</a>
+			<li class="subMenu open"><a> ELECTRONICS [230]</a>
 				<ul>
-				<li><a class="active" href="products.jsp"><i class="icon-chevron-right"></i>Réfrigérateur</a></li>
-				<li><a href="products.jsp"><i class="icon-chevron-right"></i>Lavage</a></li>
-				<li><a href="products.jsp"><i class="icon-chevron-right"></i>Cuisson</a></li>
-				<li><a href="products.jsp"><i class="icon-chevron-right"></i>Chaud/Froid</a></li>
-				<li><a href="products.jsp"><i class="icon-chevron-right"></i>Petit déjeuner</a></li>
-				<li><a href="products.jsp"><i class="icon-chevron-right"></i>Bien être</a></li>
-				<li><a href="products.jsp"><i class="icon-chevron-right"></i>Soins maison</a></li>
+				<li><a class="active" href="products.jsp"><i class="icon-chevron-right"></i>Cameras (100) </a></li>
+				<li><a href="products.jsp"><i class="icon-chevron-right"></i>Computers, Tablets & laptop (30)</a></li>
+				<li><a href="products.jsp"><i class="icon-chevron-right"></i>Mobile Phone (80)</a></li>
+				<li><a href="products.jsp"><i class="icon-chevron-right"></i>Sound & Vision (15)</a></li>
 				</ul>
 			</li>
 			<li class="subMenu"><a> CLOTHES [840] </a>
@@ -234,250 +170,164 @@ else { %>
 			  </div>
 	</div>
 <!-- Sidebar end=============================================== -->
-		<div class="span9">		
-			<div class="well well-small">
-			<h4>Featured Products <small class="pull-right">200+ featured products</small></h4>
-			<div class="row-fluid">
-			<div id="featured" class="carousel slide">
-			<div class="carousel-inner">
-			  <div class="item active">
-			  <ul class="thumbnails">
-				<li class="span3">
-				  <div class="thumbnail">
-				  <i class="tag"></i>
-					<a href="product_details.jsp"><img src="themes/images/products/b1.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
+		<li class="active"> SHOPPING CART</li>
+    </ul>
+	<h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.jsp" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+	<hr class="soft"/>
+	<table class="table table-bordered">
+		<tr><th> I AM ALREADY REGISTERED  </th></tr>
+		 <tr> 
+		 <td>
+			<form class="form-horizontal">
+				<div class="control-group">
+				  <label class="control-label" for="inputUsername">Username</label>
+				  <div class="controls">
+					<input type="text" id="inputUsername" placeholder="Username">
 				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-				  <i class="tag"></i>
-					<a href="product_details.jsp"><img src="themes/images/products/b2.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-				  <i class="tag"></i>
-					<a href="product_details.jsp"><img src="themes/images/products/b3.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-				  <i class="tag"></i>
-					<a href="product_details.jsp"><img src="themes/images/products/b4.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-			  </ul>
-			  </div>
-			   <div class="item">
-			  <ul class="thumbnails">
-				<li class="span3">
-				  <div class="thumbnail">
-				  <i class="tag"></i>
-					<a href="product_details.jsp"><img src="themes/images/products/5.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-				  <i class="tag"></i>
-					<a href="product_details.jsp"><img src="themes/images/products/6.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.jsp"><img src="themes/images/products/7.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.jsp"><img src="themes/images/products/8.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-			  </ul>
-			  </div>
-			   <div class="item">
-			  <ul class="thumbnails">
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.jsp"><img src="themes/images/products/9.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.jsp"><img src="themes/images/products/10.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.jsp"><img src="themes/images/products/11.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.jsp"><img src="themes/images/products/1.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-			  </ul>
-			  </div>
-			   <div class="item">
-			  <ul class="thumbnails">
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.jsp"><img src="themes/images/products/2.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.jsp"><img src="themes/images/products/3.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.jsp"><img src="themes/images/products/4.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.jsp"><img src="themes/images/products/5.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.jsp">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-			  </ul>
-			  </div>
-			  </div>
-			  <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
-			  <a class="right carousel-control" href="#featured" data-slide="next">›</a>
-			  </div>
-			  </div>
-		</div>
-		<h4>Latest Products </h4>
-
-					<ul class="thumbnails">
-						<%
-			    List<Upload> uploads = (List<Upload>) request.getAttribute("uploads");
-			  if (uploads.size() == 0) {
-				    %>
-						<li class="span3">
-							<div class="thumbnail">
-								<a href=""><img src="" alt="" /></a>
-								<div class="caption">
-									<h5>doesn't work on localhost</h5>
-									<p>Aucune icône uploadée ou vous etes on localhost</p>
-									<h4 style="text-align: center">
-										<a class="btn" href=""> <i class="icon-zoom-in"></i></a> <a
-											class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a>
-										<a class="btn btn-primary" href="#">$222.00</a>
-									</h4>
-								</div>
-							</div>
-						</li>
-						<%
-							}
-								else {
-								int i = 0;
-							    for (Upload upload : uploads) {
-									if ((i % 3) == 0) {
-						%>
-
-						<li class="span3">
-							<div class="thumbnail">
-								<%
-									}
-								%>
-								<a href="product_details.jsp"><img
-									src="<%=upload.getUrl()%>" alt="" /></a>
-								<div class="caption">
-									<h5><%=upload.getTitle()%></h5>
-									<p>
-										<%=upload.getDescription()%>
-									</p>
-
-									<h4 style="text-align: center">
-										<a class="btn" href="product_details.jsp"> <i
-											class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to
-											<i class="icon-shopping-cart"></i>
-										</a> <a class="btn btn-primary" href="#">$222.00</a>
-									</h4>
-								</div>
-
-								<%
-									if ((i % 3) == 2 || i == uploads.size() - 1) {
-								%>
-							</div>
-						</li>
-						<%			}
-						i++;
-					}
-			    }%>
-
-					</ul>
-
 				</div>
-		</div>
-	</div>
+				<div class="control-group">
+				  <label class="control-label" for="inputPassword1">Password</label>
+				  <div class="controls">
+					<input type="password" id="inputPassword1" placeholder="Password">
+				  </div>
+				</div>
+				<div class="control-group">
+				  <div class="controls">
+					<button type="submit" class="btn">Sign in</button> OR <a href="register.jsp" class="btn">Register Now!</a>
+				  </div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+					  <a href="forgetpass.jsp" style="text-decoration:underline">Forgot password ?</a>
+					</div>
+				</div>
+			</form>
+		  </td>
+		  </tr>
+	</table>		
+			
+	<table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Description</th>
+                  <th>Quantity/Update</th>
+				  <th>Price</th>
+                  <th>Discount</th>
+                  <th>Tax</th>
+                  <th>Total</th>
+				</tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> <img width="60" src="themes/images/products/4.jpg" alt=""/></td>
+                  <td>MASSA AST<br/>Color : black, Material : metal</td>
+				  <td>
+					<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
+				  </td>
+                  <td>$120.00</td>
+                  <td>$25.00</td>
+                  <td>$15.00</td>
+                  <td>$110.00</td>
+                </tr>
+				<tr>
+                  <td> <img width="60" src="themes/images/products/8.jpg" alt=""/></td>
+                  <td>MASSA AST<br/>Color : black, Material : metal</td>
+				  <td>
+					<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1"  size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
+				  </td>
+                  <td>$7.00</td>
+                  <td>--</td>
+                  <td>$1.00</td>
+                  <td>$8.00</td>
+                </tr>
+				<tr>
+                  <td> <img width="60" src="themes/images/products/3.jpg" alt=""/></td>
+                  <td>MASSA AST<br/>Color : black, Material : metal</td>
+				  <td>
+					<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1"  size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
+				  </td>
+                  <td>$120.00</td>
+                  <td>$25.00</td>
+                  <td>$15.00</td>
+                  <td>$110.00</td>
+                </tr>
+				
+                <tr>
+                  <td colspan="6" style="text-align:right">Total Price:	</td>
+                  <td> $228.00</td>
+                </tr>
+				 <tr>
+                  <td colspan="6" style="text-align:right">Total Discount:	</td>
+                  <td> $50.00</td>
+                </tr>
+                 <tr>
+                  <td colspan="6" style="text-align:right">Total Tax:	</td>
+                  <td> $31.00</td>
+                </tr>
+				 <tr>
+                  <td colspan="6" style="text-align:right"><strong>TOTAL ($228 - $50 + $31) =</strong></td>
+                  <td class="label label-important" style="display:block"> <strong> $155.00 </strong></td>
+                </tr>
+				</tbody>
+            </table>
+		
+		
+            <table class="table table-bordered">
+			<tbody>
+				 <tr>
+                  <td> 
+				<form class="form-horizontal">
+				<div class="control-group">
+				<label class="control-label"><strong> VOUCHERS CODE: </strong> </label>
+				<div class="controls">
+				<input type="text" class="input-medium" placeholder="CODE">
+				<button type="submit" class="btn"> ADD </button>
+				</div>
+				</div>
+				</form>
+				</td>
+                </tr>
+				
+			</tbody>
+			</table>
+			
+			<table class="table table-bordered">
+			 <tr><th>ESTIMATE YOUR SHIPPING </th></tr>
+			 <tr> 
+			 <td>
+				<form class="form-horizontal">
+				  <div class="control-group">
+					<label class="control-label" for="inputCountry">Country </label>
+					<div class="controls">
+					  <input type="text" id="inputCountry" placeholder="Country">
+					</div>
+				  </div>
+				  <div class="control-group">
+					<label class="control-label" for="inputPost">Post Code/ Zipcode </label>
+					<div class="controls">
+					  <input type="text" id="inputPost" placeholder="Postcode">
+					</div>
+				  </div>
+				  <div class="control-group">
+					<div class="controls">
+					  <button type="submit" class="btn">ESTIMATE </button>
+					</div>
+				  </div>
+				</form>				  
+			  </td>
+			  </tr>
+            </table>		
+	<a href="products.jsp" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+	<a href="login.jsp" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+	
 </div>
+</div></div>
+</div>
+<!-- MainBody End ============================= -->
 <!-- Footer ================================================================== -->
 	<div  id="footerSection">
 	<div class="container">

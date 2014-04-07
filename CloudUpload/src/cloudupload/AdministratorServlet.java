@@ -47,7 +47,7 @@ public class AdministratorServlet extends HttpServlet {
         Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
         List<BlobKey> blobKeys = blobs.get("uploadedFile");
 
-        Upload upload = new Upload(blobKeys.get(0), req.getParameter("description"));
+        Upload upload = new Upload(blobKeys.get(0), req.getParameter("description"),req.getParameter("title"),req.getParameter("descri_d"));
 
         ofy().save().entity(upload).now();
 

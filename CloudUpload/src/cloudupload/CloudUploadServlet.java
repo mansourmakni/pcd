@@ -26,16 +26,7 @@ public class CloudUploadServlet extends HttpServlet {
         List<Upload> uploads = ofy().load().type(Upload.class).order("-date").limit(9).list();
         req.setAttribute("uploads", uploads);
 
-        // Supprime un upload si on l'a demandŽ
-        if (req.getParameter("delete") != null) {
-            BlobKey deleteUploadData = new BlobKey(req.getParameter("delete"));
-            Upload deleteUploadInfos = ofy().load().type(Upload.class).filter("key", deleteUploadData).first().now();
-            if (deleteUploadInfos != null) {
-                blobstoreService.delete(deleteUploadData);
-                ofy().delete().entity(deleteUploadInfos).now();
-            }
-        }
-
+       
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
         
     }
@@ -47,7 +38,7 @@ public class CloudUploadServlet extends HttpServlet {
         Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
         List<BlobKey> blobKeys = blobs.get("uploadedFile");
 
-        Upload upload = new Upload(blobKeys.get(0), req.getParameter("description"));
+        Upload upload = new Upload(blobKeys.get(0), req.getParameter("description"),req.getParameter("title"),req.getParameter("descri_d"));
 
         ofy().save().entity(upload).now();
 

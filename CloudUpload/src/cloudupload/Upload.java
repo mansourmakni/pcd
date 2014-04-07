@@ -18,15 +18,18 @@ public class Upload {
     @Index BlobKey key;
     String title;
     String description;
+    String descri_d;
     
     private Upload() {}
-    public Upload(BlobKey key, String description) {
+    public Upload(BlobKey key, String description,String title,String descri_d) {
         ImagesService imagesService = ImagesServiceFactory.getImagesService();
         
         this.date = new Date();
         this.key = key;
         this.url = imagesService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(key));
         this.description = description;
+        this.descri_d = descri_d;
+        this.title = title;
     }
     
 
@@ -44,6 +47,12 @@ public class Upload {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
     }
     
 }

@@ -2,10 +2,11 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.google.appengine.api.blobstore.*"%>
 <%@ page import="cloudupload.Upload"%>
-
+<!--gmail -->
+<%@ page import="com.google.appengine.api.users.*" %>
+<% UserService userService = UserServiceFactory.getUserService(); %>
 <%
-    BlobstoreService blobstoreService = BlobstoreServiceFactory
-            .getBlobstoreService();
+    BlobstoreService blobstoreService = BlobstoreServiceFactory .getBlobstoreService();
 %>
 
 <!DOCTYPE html>
@@ -45,7 +46,10 @@
 <div id="header">
 <div class="container">
 <div id="welcomeLine" class="row">
-	<div class="span6">Welcome!<strong> User</strong></div>
+	<div class="span6">Welcome!<strong> <% if (userService.getCurrentUser() == null) { }
+else { %>
+<%= userService.getCurrentUser().getNickname() %>
+<% } %> </strong></div>
 	<div class="span6">
 	<div class="pull-right">
 		<a href="product_summary.jsp"><span class="">Fr</span></a>
@@ -84,30 +88,12 @@
 	 <li class=""><a href="formUpload.jsp">Admin</a></li>
 	 <li class=""><a href="contact.jsp">Contact</a></li>
 	 <li class="">
-	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3>Login Block</h3>
-		  </div>
-		  <div class="modal-body">
-			<form class="form-horizontal loginFrm">
-			  <div class="control-group">								
-				<input type="text" id="inputEmail" placeholder="Email">
-			  </div>
-			  <div class="control-group">
-				<input type="password" id="inputPassword" placeholder="Password">
-			  </div>
-			  <div class="control-group">
-				<label class="checkbox">
-				<input type="checkbox"> Remember me
-				</label>
-			  </div>
-			</form>		
-			<button type="submit" class="btn btn-success">Sign in</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		  </div>
-	</div>
+	 <% if (userService.getCurrentUser() == null) { %>
+<p><a href="<%= userService.createLoginURL("/admin.jsp") %> " ><span class="btn btn-large btn-success">Login</span></a></p>
+<% }
+else { %>
+<p><a href="<%= userService.createLogoutURL("/") %> " ><span class="btn btn-large btn-success">Logout</span></a></p>
+<% } %>
 	</li>
     </ul>
   </div>
@@ -457,7 +443,7 @@
 				  <% } %>
 					<a  href="product_details.jsp"><img src="<%=upload.getUrl()%>" alt=""/></a>
 					<div class="caption">
-					  <h5>title</h5>
+					  <h5><%=upload.getTitle()%></h5>
 					  <p> 
 						<a class="close" href="/admin.jsp?delete=<%=upload.getKeyString() %>">&times;</a> <%=upload.getDescription()%> 
 					  </p>
@@ -489,10 +475,16 @@
 									<label>Fichier à envoyer : <input type="file"
 										name="uploadedFile" /></label>
 								</p>
-								
 								<p>
-									<label>Description du fichier : <input type="text"
+									<label>Title du fichier : <input type="text"
+										name="title" /></label>
+								</p>
+								<p>
+									<label>Description rapide : <input type="text"
 										name="description" /></label>
+								</p>
+								<p>
+									<label>Description : <input type="text" name="descri_d" /></label>
 								</p>
 								<div class="form-actions">
 									<input type="submit" class="btn" />
