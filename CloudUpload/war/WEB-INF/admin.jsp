@@ -484,7 +484,22 @@ else { %>
 										name="description" /></label>
 								</p>
 								<p>
-									<label>Description : <input type="text" name="descri_d" /></label>
+									<label>Description : </label>
+									<textarea name="descri_d"></textarea>
+								</p>
+								<p>
+									<label for="catégorie">Quel type vous choisissez ?</label><br />
+									<select name="catégorie" id="catégorie">
+										<optgroup label="Electro">
+											<option value="Réfrigérateur">Réfrigérateur</option>
+											<option value="Lavage">Lavage</option>
+											<option value="Cuisson">Cuisson</option>
+											<option value="Chaud/Froid">Chaud/Froid</option>
+											<option value="Petit déjeuner">Petit déjeuner</option>
+											<option value="Bien être">Bien être</option>
+											<option value="Soins maison">Soins maison</option>
+										</optgroup>
+									</select>
 								</p>
 								<div class="form-actions">
 									<input type="submit" class="btn" />

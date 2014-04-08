@@ -23,7 +23,7 @@ public class AdministratorServlet extends HttpServlet {
         BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
         // RŽcup�re les derniers uploads
-        List<Upload> uploads = ofy().load().type(Upload.class).order("-date").limit(9).list();
+        List<Upload> uploads = ofy().load().type(Upload.class).order("-date").limit(50).list();
         req.setAttribute("uploads", uploads);
 
         // Supprime un upload si on l'a demandŽ
