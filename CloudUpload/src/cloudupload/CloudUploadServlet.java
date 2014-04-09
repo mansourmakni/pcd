@@ -23,7 +23,7 @@ public class CloudUploadServlet extends HttpServlet {
         BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
         // RŽcup�re les derniers uploads
-        List<Upload> uploads = ofy().load().type(Upload.class).order("-date").limit(50).list();
+        List<Upload> uploads = ofy().load().type(Upload.class).order("-date").limit(9).list();
         req.setAttribute("uploads", uploads);
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
@@ -37,7 +37,7 @@ public class CloudUploadServlet extends HttpServlet {
         Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
         List<BlobKey> blobKeys = blobs.get("uploadedFile");
 
-        Upload upload = new Upload(blobKeys.get(0), req.getParameter("description"),req.getParameter("title"),req.getParameter("descri_d"));
+        Upload upload = new Upload(blobKeys.get(0), req.getParameter("description"),req.getParameter("title"),req.getParameter("descri_d"),req.getParameter("categorie"));
 
         ofy().save().entity(upload).now();
 

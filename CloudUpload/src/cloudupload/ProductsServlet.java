@@ -1,5 +1,6 @@
 package cloudupload;
 
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import com.google.appengine.api.blobstore.*;
 import com.googlecode.objectify.ObjectifyService;
 
 @SuppressWarnings("serial")
-public class AdministratorServlet extends HttpServlet {
+public class ProductsServlet  extends HttpServlet {
     static {
         ObjectifyService.register(Upload.class);
     }
@@ -22,21 +23,12 @@ public class AdministratorServlet extends HttpServlet {
             throws IOException, ServletException {
         BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
+        String param = req.getParameter( "type" );
         // RŽcup�re les derniers uploads
-        List<Upload> uploads = ofy().load().type(Upload.class).order("-date").limit(9).list();
+        List<Upload> uploads = ofy().load().type(Upload.class).filter("categorie",param).order("-date").limit(9).list();
         req.setAttribute("uploads", uploads);
 
-        // Supprime un upload si on l'a demandŽ
-        if (req.getParameter("delete") != null) {
-            BlobKey deleteUploadData = new BlobKey(req.getParameter("delete"));
-            Upload deleteUploadInfos = ofy().load().type(Upload.class).filter("key", deleteUploadData).first().now();
-            if (deleteUploadInfos != null) {
-                blobstoreService.delete(deleteUploadData);
-                ofy().delete().entity(deleteUploadInfos).now();
-            }
-        }
-
-        this.getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(req, resp);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/products.jsp").forward(req, resp);
         
     }
 
@@ -55,4 +47,3 @@ public class AdministratorServlet extends HttpServlet {
 
     }
 }
-

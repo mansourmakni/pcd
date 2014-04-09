@@ -19,9 +19,10 @@ public class Upload {
     String title;
     String description;
     String descri_d;
+    @Index String categorie;
     
     private Upload() {}
-    public Upload(BlobKey key, String description,String title,String descri_d) {
+    public Upload(BlobKey key, String description,String title,String descri_d,String categorie) {
         ImagesService imagesService = ImagesServiceFactory.getImagesService();
         
         this.date = new Date();
@@ -30,6 +31,7 @@ public class Upload {
         this.description = description;
         this.descri_d = descri_d;
         this.title = title;
+        this.categorie = categorie;
     }
     
 
@@ -41,6 +43,12 @@ public class Upload {
     }
     public String getKeyString() {
         return key.getKeyString();
+    }
+    public String getcategorie() {
+        return categorie;
+    }
+    public void setcategorie(String categorie) {
+        this.categorie = categorie;
     }
     public String getDescription() {
         return description;

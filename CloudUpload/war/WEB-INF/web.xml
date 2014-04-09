@@ -13,6 +13,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>Products</servlet-name>
+		<servlet-class>cloudupload.ProductsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Products</servlet-name>
+		<url-pattern>products.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>Administrator</servlet-name>
 		<servlet-class>cloudupload.AdministratorServlet</servlet-class>
 	</servlet>

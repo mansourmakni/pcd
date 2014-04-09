@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/cloudupload/AdministratorServlet.java=UTF-8
 encoding//src/cloudupload/CloudUploadServlet.java=UTF-8
+encoding//src/cloudupload/ProductsServlet.java=UTF-8
+encoding//war/WEB-INF/Featured.jsp=UTF-8
