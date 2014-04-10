@@ -67,7 +67,7 @@
 									}
 								%>
 								<a href="product_details.jsp"><img
-									src="<%=upload.getUrl()%>" alt="" /></a>
+									src="<%=upload.getUrl()+"=s160"%>" alt="" /></a>
 								<div class="caption">
 									<h5><%=upload.getTitle()%></h5>
 									<p>

@@ -241,7 +241,7 @@
 		
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.jsp"><img src="themes/images/products/3.jpg" alt=""/></a>
+				<a href="product_details.jsp"><img src="" alt=""/></a>
 				<div class="caption">
 				  <h5>doesn't work on localhost</h5>
 				  <p> 
@@ -264,7 +264,7 @@
 			  <%
 									}
 								%>
-				<a href="product_details.jsp"><img src="<%=upload.getUrl()%>" alt=""/></a>
+				<a href="product_details.jsp"><img src="<%=upload.getUrl()+"=s160"%>" alt=""/></a>
 				<div class="caption">
 				  <h5><%=upload.getTitle()%></h5>
 									<p>
